@@ -1,0 +1,10 @@
+parameters:
+  clooder.imagine.twig.class: Clooder\ImagineBundle\Twig\TwigImagineExtension
+
+
+services:
+  clooder.imagine.extension:
+    class: %clooder.imagine.twig.class%
+    tags:
+      - {name: twig.extension }
+    public: false

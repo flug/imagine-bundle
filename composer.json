@@ -1,0 +1,21 @@
+{
+    "name": "clooder/imaginebundle",
+    "description": "a Symfony2 bundle that used the library and guess who can use the remote image",
+    "require": {
+        "imagine/imagine": "0.6.x"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "flug",
+            "email": "flug@clooder.com"
+        }
+    ],
+    "autoload":
+    {
+        "psr-4": {
+            "Clooder\\ImagineBundle\\": ""
+        }
+    },
+    "minimum-stability": "dev"
+}
