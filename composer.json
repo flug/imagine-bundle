@@ -1,5 +1,5 @@
 {
-    "name": "clooder/imaginebundle",
+    "name": "clooder/imagine-bundle",
     "description": "a Symfony2 bundle that used the library and guess who can use the remote image",
     "require": {
         "imagine/imagine": "0.6.x"
