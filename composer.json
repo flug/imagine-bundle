@@ -11,6 +11,11 @@
             "email": "flug@clooder.com"
         }
     ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x.x-dev"
+        }
+    },
     "autoload":
     {
         "psr-4": {
