@@ -2,7 +2,9 @@
     "name": "clooder/imagine-bundle",
     "description": "a Symfony2 bundle that used the library and guess who can use the remote image",
     "require": {
-        "imagine/imagine": "0.6.x"
+        "imagine/imagine": "0.6.x",
+        "symfony/finder": ">=2.0.16,~2.0",
+        "symfony/filesystem": ">=2.0.16,~2.0"
     },
     "license": "MIT",
     "authors": [
@@ -16,8 +18,7 @@
             "dev-master": "1.x.x-dev"
         }
     },
-    "autoload":
-    {
+    "autoload": {
         "psr-4": {
             "Clooder\\ImagineBundle\\": ""
         }

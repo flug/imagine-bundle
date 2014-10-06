@@ -30,5 +30,10 @@ class ClooderImagineExtension extends Extension {
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('clooder_imagine.driver', $config['driver']);
+        $container->setParameter('clooder_imagine.cache_directory', $config['cache_directory']);
+        $container->setParameter('clooder_imagine.filters_configuration', $config['filters_configuration']);
+
     }
 }

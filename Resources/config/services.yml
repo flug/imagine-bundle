@@ -1,5 +1,12 @@
 parameters:
   clooder.imagine.twig.class: Clooder\ImagineBundle\Twig\TwigImagineExtension
+  clooder.engine.filter.class: Clooder\ImagineBundle\Engine\FilterImagine
+  clooder.imagine.factory.class: Clooder\ImagineBundle\Factory\ImagineFactory
+  clooder.imagine.manager.class: Clooder\ImagineBundle\Manager\ImagineManager
+
+  clooder.filter.configuration.class: Clooder\ImagineBundle\Configuration\FilterConfiguration
+
+
 
 
 services:
@@ -7,4 +14,23 @@ services:
     class: %clooder.imagine.twig.class%
     tags:
       - {name: twig.extension }
+    arguments: [@clooder.engine.imagine]
+
     public: false
+
+
+  clooder.imagine.configuration:
+      class: %clooder.filter.configuration.class%
+      arguments: [%clooder_imagine.filters_configuration%, %clooder_imagine.cache_directory%]
+
+  clooder.imagine.manager:
+      class: %clooder.imagine.manager.class%
+      arguments: [@clooder.imagine.configuration, @clooder.imagine.factory, @filesystem]
+
+  clooder.engine.imagine:
+      class: %clooder.engine.filter.class%
+      arguments: [@clooder.imagine.manager, @filesystem]
+
+  clooder.imagine.factory:
+      class: %clooder.imagine.factory.class%
+      arguments: [%clooder_imagine.driver%, %clooder_imagine.cache_directory%, @filesystem,  %kernel.root_dir%]
