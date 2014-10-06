@@ -31,6 +31,7 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->end()
             ->scalarNode('cache_directory')->defaultValue('/media/cache')->end()
+            ->scalarNode('file_not_found')->defaultValue('/web/media/images/notfound.jpg')->end()
             ->arrayNode('filters_configuration')
                 ->useAttributeAsKey('name')
                     ->prototype('array')
