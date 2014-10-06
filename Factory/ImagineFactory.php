@@ -77,7 +77,7 @@ class ImagineFactory
             $filePath = $this->kernelRootDir . '/../web' . $filePath;
         }
         if (!$this->fs->exists($filePath)) {
-            throw new \RuntimeException(sprintf('File %s not found', $filePath));
+            $filePath =  $filter->getFileNotFound();
         }
 
         $filename = current(array_reverse(explode('/', $filePath)));

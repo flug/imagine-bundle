@@ -21,7 +21,7 @@ services:
 
   clooder.imagine.configuration:
       class: %clooder.filter.configuration.class%
-      arguments: [%clooder_imagine.filters_configuration%, %clooder_imagine.cache_directory%]
+      arguments: [%clooder_imagine.filters_configuration%, %clooder_imagine.cache_directory%, %clooder_imagine.file_not_found%]
 
   clooder.imagine.manager:
       class: %clooder.imagine.manager.class%

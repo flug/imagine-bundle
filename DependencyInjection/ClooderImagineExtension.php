@@ -34,6 +34,7 @@ class ClooderImagineExtension extends Extension
         $container->setParameter('clooder_imagine.driver', $config['driver']);
         $container->setParameter('clooder_imagine.cache_directory', $config['cache_directory']);
         $container->setParameter('clooder_imagine.filters_configuration', $config['filters_configuration']);
+        $container->setParameter('clooder_imagine.file_not_found', $config['file_not_found']);
 
     }
 }
