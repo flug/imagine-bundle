@@ -72,8 +72,12 @@ class ImagineFactory
 
     public function build($filePath, $filter)
     {
+
+        if (!strpos($filePath, 'tmp')) {
+            $filePath = $this->kernelRootDir . '/../web' . $filePath;
+        }
         if (!$this->fs->exists($filePath)) {
-            throw new \IOException('File not found');
+            throw new \RuntimeException(sprintf('File %s not found', $filePath));
         }
 
         $filename = current(array_reverse(explode('/', $filePath)));
