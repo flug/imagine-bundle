@@ -16,15 +16,15 @@ class ImagineFactory
     private $kernelRootDir;
 
     public function __construct(
-        $driver ,
+        $driver,
         $pathCache,
         Filesystem $filesystem,
         $kernelRootDir
     )
     {
-        $this->driver    = $driver;
-        $this->pathCache = $pathCache;
-        $this->fs        = $filesystem;
+        $this->driver        = $driver;
+        $this->pathCache     = $pathCache;
+        $this->fs            = $filesystem;
         $this->kernelRootDir = $kernelRootDir;
     }
 
@@ -32,16 +32,16 @@ class ImagineFactory
     {
 
         switch ($this->driver) {
-        case 'gd':
-        default:
-            return new \Imagine\Gd\Imagine();
-            break;
-        case 'imagick':
-            return new \Imagine\Imagick\Imagine();
-            break;
-        case 'gmagick':
-            return new \Imagine\Gmagick\Imagine();
-            break;
+            case 'gd':
+            default:
+                return new \Imagine\Gd\Imagine();
+                break;
+            case 'imagick':
+                return new \Imagine\Imagick\Imagine();
+                break;
+            case 'gmagick':
+                return new \Imagine\Gmagick\Imagine();
+                break;
 
         }
     }
@@ -55,8 +55,8 @@ class ImagineFactory
     {
 
         $returnToWebRoot = '/../web/';
-        $baseCache = $this->kernelRootDir.$returnToWebRoot.$cacheDirectory;
-        $ds = DIRECTORY_SEPARATOR;
+        $baseCache       = $this->kernelRootDir . $returnToWebRoot . $cacheDirectory;
+        $ds              = DIRECTORY_SEPARATOR;
         if (!$this->fs->exists($baseCache)) {
             $this->fs->mkdir($baseCache);
         }
@@ -66,6 +66,7 @@ class ImagineFactory
         if (!$this->fs->exists($directoryConfiguration)) {
             $this->fs->mkdir($directoryConfiguration);
         }
+
         return $directoryConfiguration;
     }
 
@@ -77,10 +78,13 @@ class ImagineFactory
 
         $filename = current(array_reverse(explode('/', $filePath)));
 
-        $webPath = $filter->getCacheDirectory().DIRECTORY_SEPARATOR. $filter->getFilterCall().DIRECTORY_SEPARATOR. $filter->getType().DIRECTORY_SEPARATOR. $filename;
-        $fullPath = $this->buildCachePath($filter->getCacheDirectory(), $filter->getFilterCall(), $filter->getType()). '/'.$filename;
+        $webPath  = $filter->getCacheDirectory() . DIRECTORY_SEPARATOR .
+            $filter->getFilterCall() . DIRECTORY_SEPARATOR .
+            $filter->getType() . DIRECTORY_SEPARATOR .
+            $filename;
+        $fullPath = $this->buildCachePath($filter->getCacheDirectory(), $filter->getFilterCall(), $filter->getType()) . '/' . $filename;
 
-        if(!$this->fs->exists($fullPath)){
+        if (!$this->fs->exists($fullPath)) {
             $imagine  = $this->get();
             $instance = $imagine->open($filePath);
             $instance->thumbnail($this->size($filter), $filter->getMode());
@@ -88,7 +92,7 @@ class ImagineFactory
         }
 
 
-        return '/web'.$webPath;
+        return '/web' . $webPath;
     }
 
 }

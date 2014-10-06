@@ -98,6 +98,7 @@ class FilterConfiguration
 
     private $cacheDirectory;
     private $kernelRootDir;
+
     public function __construct(
         array $filters = [],
         $cacheDirectory)
@@ -120,6 +121,7 @@ class FilterConfiguration
         $filterCall       = $this->filters[$filter];
         $this->setQuality($filterCall['quality']);
         $this->setFilterCalling($filterCall['filters']);
+
         return $this;
     }
 

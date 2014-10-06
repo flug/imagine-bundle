@@ -28,11 +28,11 @@ class ImagineManager
     public function getPath()
     {
         $imagine = $this->factory;
-       return $imagine->build(
+
+        return $imagine->build(
             $this->filePath,
             $this->filter
         );
-
 
 
     }

@@ -22,8 +22,8 @@ class ClearCacheClooderImagineCommand extends ContainerAwareCommand
         $kernelRootDir               = $this->getContainer()->getParameter('kernel.root_dir');
 
         $removePath = $kernelRootDir . "/../web" . $clooderImagineConfiguration->getCacheDirectory();
-        if ($fs->exists($removePath)){
-            $fs->remove($removePath); 
+        if ($fs->exists($removePath)) {
+            $fs->remove($removePath);
         }
 
 
