@@ -80,7 +80,7 @@ class ImagineFactory
 
     public function build($filePath, $filter)
     {
-
+        $returnToWebRoot = '/../web/';
         if (!strpos($filePath, 'tmp')) {
             $filePath = $this->kernelRootDir . '/../web' . $filePath;
         }
@@ -101,6 +101,10 @@ class ImagineFactory
 
             $transformation = new Transformation();
 
+            if(!strpos($filePath, "/../web"))
+            {
+                $filePath = $this->kernelRootDir. $returnToWebRoot  .$filePath;
+            }
             $transformation->thumbnail($this->size($filter, getimagesize($filePath), $filter->getMode()))->save($fullPath);
 
             $transformation->apply($imagine->open($filePath));
