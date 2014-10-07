@@ -11,6 +11,11 @@ class FilterConfiguration
     private $filters;
 
 
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
     private $quality,
         $width,
         $height,

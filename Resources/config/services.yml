@@ -5,9 +5,12 @@ parameters:
   clooder.imagine.manager.class: Clooder\ImagineBundle\Manager\ImagineManager
 
   clooder.filter.configuration.class: Clooder\ImagineBundle\Configuration\FilterConfiguration
+  clooder.imagine.routing.loader.class: Clooder\ImagineBundle\Routing\ClooderLoader
 
 
+  clooder.imagine.controller.action: Clooder\ImagineBundle\Controller\ImagineController
 
+  clooder.imagine.resolver.controller: "clooder.imagine.resolver.controller:filterAction"
 
 services:
   clooder.imagine.extension:
@@ -25,7 +28,7 @@ services:
 
   clooder.imagine.manager:
       class: %clooder.imagine.manager.class%
-      arguments: [@clooder.imagine.configuration, @clooder.imagine.factory, @filesystem]
+      arguments: [@clooder.imagine.configuration, @clooder.imagine.factory, @filesystem, %kernel.root_dir%]
 
   clooder.engine.imagine:
       class: %clooder.engine.filter.class%
@@ -34,3 +37,14 @@ services:
   clooder.imagine.factory:
       class: %clooder.imagine.factory.class%
       arguments: [%clooder_imagine.driver%, %clooder_imagine.cache_directory%, @filesystem,  %kernel.root_dir%]
+
+  clooder.imagine.routing.loader:
+      class: %clooder.imagine.routing.loader.class%
+      tags:
+        - {name: routing.loader }
+      arguments: [%clooder.imagine.resolver.controller%, @clooder.imagine.configuration]
+
+  clooder.imagine.resolver.controller:
+        class: %clooder.imagine.controller.action%
+        arguments: [@clooder.imagine.manager]
+ 
