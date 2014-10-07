@@ -102,17 +102,18 @@ class FilterConfiguration
     public function __construct(
         array $filters = [],
         $cacheDirectory,
-        $fileNotFount)
+        $fileNotFound)
     {
         $this->filters        = $filters;
         $this->cacheDirectory = $cacheDirectory;
-        $this->fileNotFound   = $fileNotFount;
+        $this->fileNotFound   = $fileNotFound;
     }
 
     public function getCacheDirectory()
     {
         return $this->cacheDirectory;
     }
+
     public function getFileNotFound()
     {
         return $this->fileNotFound;
