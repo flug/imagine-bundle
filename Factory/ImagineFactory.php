@@ -95,8 +95,7 @@ class ImagineFactory
             $instance->save($fullPath);
         }
 
-
-        return '/web' . $webPath;
+        return $webPath;
     }
 
 }
