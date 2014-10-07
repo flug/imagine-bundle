@@ -5,6 +5,7 @@ namespace Clooder\ImagineBundle\Factory;
 
 
 use Clooder\ImagineBundle\Configuration\FilterConfiguration;
+use Imagine\Filter\Transformation;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImagineFactory
@@ -46,9 +47,16 @@ class ImagineFactory
         }
     }
 
-    private function size($size)
+    private function size($size, $origineSize)
     {
-        return new \Imagine\Image\Box($size->getWidth(), $size->getHeight());
+
+        list ($origineWidth, $origineHeight) = $origineSize;
+
+        $height = (int)(($size->getWidth() / $origineWidth) * $origineHeight);
+        $width  = (int)(($size->getHeight() / $origineHeight) * $origineWidth);
+
+
+        return new \Imagine\Image\Box($width, $height);
     }
 
     private function buildCachePath($cacheDirectory, $confiqurationCall, $type)
@@ -90,9 +98,14 @@ class ImagineFactory
 
         if (!$this->fs->exists($fullPath)) {
             $imagine  = $this->get();
-            $instance = $imagine->open($filePath);
-            $instance->thumbnail($this->size($filter), $filter->getMode());
-            $instance->save($fullPath);
+
+            $transformation = new Transformation();
+
+            $transformation->thumbnail($this->size($filter, getimagesize($filePath), $filter->getMode()))->save($fullPath);
+
+            $transformation->apply($imagine->open($filePath));
+
+
         }
 
         return $webPath;
