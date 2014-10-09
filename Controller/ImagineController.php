@@ -21,7 +21,7 @@ class ImagineController {
     public function filterAction(Request $request, $path, $filter)
     {
 
-        $response = $this->imagineManager->get($request,$filter, $path);
-        return new Response();
+        return $this->imagineManager->get($request,$filter, $path);
+
     }
 } 
