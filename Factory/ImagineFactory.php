@@ -105,7 +105,11 @@ class ImagineFactory
             {
                 $filePath = $this->kernelRootDir. $returnToWebRoot  .$filePath;
             }
-            $transformation->thumbnail($this->size($filter, getimagesize($filePath), $filter->getMode()))->save($fullPath);
+
+
+            $imageSize = getimagesize($filePath);
+
+            $transformation->thumbnail($this->size($filter, $imageSize, $filter->getMode()))->save($fullPath);
 
             $transformation->apply($imagine->open($filePath));
 
