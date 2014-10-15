@@ -15,7 +15,7 @@ class FilterImagine
 {
 
     private $imagineManger;
-    private $temporaryDownloadFile = "/tmp";
+    private $temporaryDownloadFile;
     private $fs;
 
     public function __construct(ImagineManager $imagineManger, Filesystem $filesystem)
@@ -37,6 +37,7 @@ class FilterImagine
 
     private function pathFileAccessiblity($path)
     {
+        $this->temporaryDownloadFile = sys_get_temp_dir();
         $urlParse = parse_url($path);
         if (isset($urlParse['scheme'])) {
             $fileTmp = $this->temporaryDownloadFile . '/image_' . md5($path);
