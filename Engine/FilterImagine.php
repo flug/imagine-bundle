@@ -41,10 +41,9 @@ class FilterImagine
         $urlParse = parse_url($path);
         if (isset($urlParse['scheme'])) {
             $fileTmp = $this->temporaryDownloadFile . '/image_' . md5($path);
-            if ($this->fs->exists($fileTmp)) {
-                $this->fs->remove($fileTmp);
+            if (!$this->fs->exists($fileTmp)) {
+                file_put_contents($fileTmp,file_get_contents($path));
             }
-            file_put_contents($fileTmp, file_get_contents($path));
 
             return $fileTmp;
         } else {
