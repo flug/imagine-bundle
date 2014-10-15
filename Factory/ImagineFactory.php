@@ -81,8 +81,9 @@ class ImagineFactory
     public function build($filePath, $filter)
     {
         $returnToWebRoot = '/../web/';
+
         if (!strpos($filePath, 'tmp')) {
-            $filePath = $this->kernelRootDir . '/../web' . $filePath;
+            $filePath = $this->kernelRootDir . $returnToWebRoot . $filePath;
         }
         if (!$this->fs->exists($filePath)) {
             $filePath = $filter->getFileNotFound();
@@ -100,10 +101,11 @@ class ImagineFactory
             $imagine  = $this->get();
 
             $transformation = new Transformation();
+            if (!strpos($filePath, 'tmp')) {
+                if (!strpos($filePath, "/../web")) {
+                    $filePath = $this->kernelRootDir . $returnToWebRoot . $filePath;
+                }
 
-            if(!strpos($filePath, "/../web"))
-            {
-                $filePath = $this->kernelRootDir. $returnToWebRoot  .$filePath;
             }
 
 
