@@ -67,7 +67,7 @@ class FilterConfiguration
     {
         $this->mode = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
 
-        if ($mode == 'inset') {
+        if ($mode != 'inset') {
             $this->mode = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
         }
 
