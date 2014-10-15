@@ -98,7 +98,7 @@ class ImagineFactory
         $fullPath = $this->buildCachePath($filter->getCacheDirectory(), $filter->getFilterCall(), $filter->getType()) . '/' . $filename;
 
         if (!$this->fs->exists($fullPath)) {
-            $imagine  = $this->get();
+            $imagine = $this->get();
 
             $transformation = new Transformation();
             if (!strpos($filePath, 'tmp')) {
@@ -107,7 +107,6 @@ class ImagineFactory
                 }
 
             }
-
 
             $imageSize = getimagesize($filePath);
 
