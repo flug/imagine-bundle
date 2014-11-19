@@ -39,9 +39,15 @@ class FilterImagine
     {
         $this->temporaryDownloadFile = sys_get_temp_dir();
         $urlParse = parse_url($path);
-        $extension = pathinfo($urlParse['path'])['extension'];
+        $info = pathinfo($urlParse['path']);
+        $extension = "";
+        if(array_key_exists('extension', $info))
+        {
+            $extension = '.'. $info['extension'];
+        }
+
         if (isset($urlParse['scheme'])) {
-            $fileTmp = $this->temporaryDownloadFile . '/image_' . md5($path) . '.' . $extension;
+            $fileTmp = $this->temporaryDownloadFile . '/image_' . md5($path) .  $extension;
             if (!$this->fs->exists($fileTmp)) {
                 file_put_contents($fileTmp,file_get_contents($path));
             }
