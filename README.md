@@ -57,7 +57,7 @@ new filter can be used immediately in a template:
 Or if you're using PHP templates:
 
 ``` php
-<img src="<?php $this['imagine']->filter('/relative/path/to/image.jpg', '295x393') ?>" />
+<img src="<?php $this['clooder_imagine']->filter('/relative/path/to/image.jpg', '295x393') ?>" />
 ```
 Or a remote image
 
