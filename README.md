@@ -62,7 +62,7 @@ Or if you're using PHP templates:
 Or a remote image
 
 ``` jinja 
-<img src="{{ 'http://example.com/image.jpg' | imagine_filter('295x393') }}" />
+<img src="{{ 'http://example.com/image.jpg' | filter_exec('295x393') }}" />
 ```
 
 If you wish you can remove all the generated cache via this command:
