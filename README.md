@@ -51,7 +51,7 @@ We'll learn more about available transformations later, but for now, this
 new filter can be used immediately in a template:
 
 ``` jinja 
-<img src="{{ '/relative/path/to/image.jpg' | imagine_filter('295x393') }}" />
+<img src="{{ '/relative/path/to/image.jpg' | filter_exec('295x393') }}" />
 ```
 
 Or if you're using PHP templates:
