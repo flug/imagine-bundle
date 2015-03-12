@@ -1,50 +1,29 @@
 parameters:
-  clooder.imagine.twig.class: Clooder\ImagineBundle\Twig\TwigImagineExtension
-  clooder.engine.filter.class: Clooder\ImagineBundle\Engine\FilterImagine
-  clooder.imagine.factory.class: Clooder\ImagineBundle\Factory\ImagineFactory
-  clooder.imagine.manager.class: Clooder\ImagineBundle\Manager\ImagineManager
+    clooder.imagine.twig.class: Clooder\ImagineBundle\Twig\TwigImagineExtension
+    clooder.engine.filter.class: Clooder\ImagineBundle\Engine\FilterImagine
+    clooder.imagine.factory.class: Clooder\ImagineBundle\Factory\ImagineFactory
+    clooder.imagine.manager.class: Clooder\ImagineBundle\Manager\ImagineManager
 
-  clooder.filter.configuration.class: Clooder\ImagineBundle\Configuration\FilterConfiguration
-  clooder.imagine.routing.loader.class: Clooder\ImagineBundle\Routing\ClooderLoader
-
-
-  clooder.imagine.controller.action: Clooder\ImagineBundle\Controller\ImagineController
-
-  clooder.imagine.resolver.controller: "clooder.imagine.resolver.controller:filterAction"
-
+    clooder.filter.configuration.class: Clooder\ImagineBundle\Configuration\FilterConfiguration
+    clooder.imagine.routing.loader.class: Clooder\ImagineBundle\Routing\ClooderLoader
+    clooder.imagine.controller.action: Clooder\ImagineBundle\Controller\ImagineController
+    clooder.imagine.resolver.controller: "clooder.imagine.resolver.controller:filterAction"
+    clooder.http.client.class: GuzzleHttp\Client
 services:
-  clooder.imagine.extension:
-    class: %clooder.imagine.twig.class%
-    tags:
-      - {name: twig.extension }
-    arguments: [@clooder.engine.imagine]
-
-    public: false
 
 
-  clooder.imagine.configuration:
-      class: %clooder.filter.configuration.class%
-      arguments: [%clooder_imagine.filters_configuration%, %clooder_imagine.cache_directory%, %clooder_imagine.file_not_found%]
+    clooder.http.client:
+        class: %clooder.http.client.class%
 
-  clooder.imagine.manager:
-      class: %clooder.imagine.manager.class%
-      arguments: [@clooder.imagine.configuration, @clooder.imagine.factory, @filesystem, %kernel.root_dir%]
 
-  clooder.engine.imagine:
-      class: %clooder.engine.filter.class%
-      arguments: [@clooder.imagine.manager, @filesystem]
+    clooder.imagine.stream.loader:
+        class: Clooder\ImagineBundle\Stream\StreamLoader
+        tags:
+            - { name: liip_imagine.binary.loader, loader: clooder_loader}
+        arguments:
+            - @clooder.http.client
+            - @filesystem
+            - %kernel.root_dir%
 
-  clooder.imagine.factory:
-      class: %clooder.imagine.factory.class%
-      arguments: [%clooder_imagine.driver%, %clooder_imagine.cache_directory%, @filesystem,  %kernel.root_dir%]
-
-  clooder.imagine.routing.loader:
-      class: %clooder.imagine.routing.loader.class%
-      tags:
-        - {name: routing.loader }
-      arguments: [%clooder.imagine.resolver.controller%, @clooder.imagine.configuration]
-
-  clooder.imagine.resolver.controller:
-        class: %clooder.imagine.controller.action%
-        arguments: [@clooder.imagine.manager]
- 
+        calls:
+            - [setCacheDirectory, ["%clooder_imagine.cache_directory%"]]
