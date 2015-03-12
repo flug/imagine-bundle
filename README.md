@@ -1,6 +1,8 @@
 ClooderImagineBundle
 =================
 
+# Deprecated
+
 This is a bundle inspired by LiipImagineBundle @liip. It makes it easy to manage images either from a folder to find this on the server or remotely. It will download and put them in the cache for reading the images on the site.
 
 Here is an example of use:
