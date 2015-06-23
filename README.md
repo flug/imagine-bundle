@@ -9,6 +9,17 @@ This bundle require ["liip/imagine-bundle"](https://github.com/liip/LiipImagineB
 
 ### Configuration
 
+Add in you AppKernel :
+
+```php
+
+    # AppKernel.php
+
+    $bundles  = array(
+        new  Clooder\ImagineBundle\ClooderImagineBundle()
+    );
+
+```
 After installing the bundle:
 
 ``` yaml
